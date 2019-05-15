@@ -21,7 +21,7 @@ class RegController extends Controller
        $pass2=$info['pass2'];
 
        //验证用户
-       if($user_name){
+       if(empty($user_name)){
            $response=[
                'errno'=>5017,
                'msg'=>'用户名不能为空'
@@ -29,7 +29,7 @@ class RegController extends Controller
            return $response;
        }
        //验证邮箱
-       if($email){
+       if(empty($email)){
            $response=[
                'errno'=>5018,
                'msg'=>'邮箱不能为空'
@@ -38,7 +38,7 @@ class RegController extends Controller
        }
 
        //验证密码
-       if($email){
+       if(empty($email)){
            $response=[
                'errno'=>5019,
                'msg'=>'密码不能为空'
@@ -46,7 +46,7 @@ class RegController extends Controller
            return $response;
        }
        //验证确认密码
-       if($email){
+       if(empty($email)){
            $response=[
                'errno'=>5020,
                'msg'=>'确认密码不能为空'
@@ -114,7 +114,7 @@ class RegController extends Controller
         $pass=$info['pass'];
 
         //验证用户
-        if($user_name){
+        if(empty($user_name)){
             $response=[
                 'errno'=>5017,
                 'msg'=>'用户名不能为空'
