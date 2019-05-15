@@ -20,39 +20,39 @@ class RegController extends Controller
        $pass1=$info['pass1'];
        $pass2=$info['pass2'];
 
-       //验证用户
-       if(empty($user_name)){
-           $response=[
-               'errno'=>5017,
-               'msg'=>'用户名不能为空'
-           ];
-           return $response;
-       }
-       //验证邮箱
-       if(empty($email)){
-           $response=[
-               'errno'=>5018,
-               'msg'=>'邮箱不能为空'
-           ];
-           return $response;
-       }
-
-       //验证密码
-       if(empty($email)){
-           $response=[
-               'errno'=>5019,
-               'msg'=>'密码不能为空'
-           ];
-           return $response;
-       }
-       //验证确认密码
-       if(empty($email)){
-           $response=[
-               'errno'=>5020,
-               'msg'=>'确认密码不能为空'
-           ];
-           return $response;
-       }
+//       //验证用户
+//       if(empty($user_name)){
+//           $response=[
+//               'errno'=>5017,
+//               'msg'=>'用户名不能为空'
+//           ];
+//           return $response;
+//       }
+//       //验证邮箱
+//       if(empty($email)){
+//           $response=[
+//               'errno'=>5018,
+//               'msg'=>'邮箱不能为空'
+//           ];
+//           return $response;
+//       }
+//
+//       //验证密码
+//       if(empty($email)){
+//           $response=[
+//               'errno'=>5019,
+//               'msg'=>'密码不能为空'
+//           ];
+//           return $response;
+//       }
+//       //验证确认密码
+//       if(empty($email)){
+//           $response=[
+//               'errno'=>5020,
+//               'msg'=>'确认密码不能为空'
+//           ];
+//           return $response;
+//       }
        //判断邮箱
        $emailInfo=DB::table('zk_user')->where('email',$email)->first();
        if(!empty($emailInfo)){
@@ -113,25 +113,25 @@ class RegController extends Controller
         $user_name=$info['user_name'];
         $pass=$info['pass'];
 
-        //验证用户
-        if(empty($user_name)){
-            $response=[
-                'errno'=>5017,
-                'msg'=>'用户名不能为空'
-            ];
-            return $response;
-        }
+//        //验证用户
+//        if(empty($user_name)){
+//            $response=[
+//                'errno'=>5017,
+//                'msg'=>'用户名不能为空'
+//            ];
+//            return $response;
+//        }
 
         $info=DB::table('zk_user')->where('user_name',$user_name)->first();
         if($info){
             if(!password_verify($pass,$info->pass)){
-                $id=$info->id;
                 $response=[
                     'errno'=>5016,
                     'msg'=>'密码不正确'
                 ];
                return $response;
             }else{
+                $id=$info->id;
                 //生成token
                 $token=$this->getLoginUserToken($id);
                 $lkey='hb_token'.$id;
