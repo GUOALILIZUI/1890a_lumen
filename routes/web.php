@@ -30,3 +30,12 @@ $router->get('getLoginUserToken','RegController@getLoginUserToken' );
 $router->post('logInfo','RegController@logInfo' );
 $router->get('b','RegController@b' );
 
+
+//5.14
+
+$router->get('center', ['middleware' => ['token', 'option'], function () {
+    //
+    'CenterController@center';
+}]);
+$router->get('center','CenterController@center' );
+

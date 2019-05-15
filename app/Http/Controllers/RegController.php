@@ -12,19 +12,24 @@ class RegController extends Controller
     /**
      * 注册
      */
-   public function regInfo(){
+   public function regInfo(Request $request){
 
-       $str=file_get_contents('php://input');
-//       echo 'str；'.$str;
-       $b64=base64_decode($str);
-       $k=openssl_get_publickey('file://'.storage_path('app/keys/public.pem'));
-       openssl_public_decrypt($b64,$en_data,$k);
-//       echo 'a：'.$en_data;
-       $info=json_decode($en_data,true);
-       $user_name=$info['user_name'];
-       $email=$info['email'];
-       $pass1=$info['pass1'];
-       $pass2=$info['pass2'];
+//    $str=file_get_contents('php://input');
+////       echo 'str；'.$str;
+//       $b64=base64_decode($str);
+//       $k=openssl_get_publickey('file://'.storage_path('app/keys/public.pem'));
+//       openssl_public_decrypt($b64,$en_data,$k);
+////       echo 'a：'.$en_data;
+//       $info=json_decode($en_data,true);
+//       $user_name=$info['user_name'];
+//       $email=$info['email'];
+//       $pass1=$info['pass1'];
+//       $pass2=$info['pass2'];
+       header("Access-Control-Allow-Origin: https://alili.gege12.vip");
+       $user_name=$request->input('user_name');
+       $email=$request->input('email');
+       $pass1=$request->input('pass1');
+       $pass2=$request->input('pass2');
 
 
        //判断邮箱
@@ -34,7 +39,8 @@ class RegController extends Controller
                'errno'=>5011,
                'msg'=>'此邮箱注册过了'
            ];
-           die(json_encode($response,JSON_UNESCAPED_UNICODE));
+           return $response;
+
        }
 
        //判断密码
@@ -43,7 +49,7 @@ class RegController extends Controller
                'errno'=>5012,
                'msg'=>'两次密码输入不一致'
            ];
-           die(json_encode($response,JSON_UNESCAPED_UNICODE));
+           return $response;
        }
 
        //处理密码
@@ -60,16 +66,15 @@ class RegController extends Controller
        if($info){
            $response=[
                'errno'=>0,
-               'msg'=>'注册成功'
+               'msg'=>'注册成功，去登陆页面啦'
            ];
-           header('refresh:3;url=http://lumen_1809a.com/loginIndex');
-           die(json_encode($response,JSON_UNESCAPED_UNICODE));
+           return $response;
        }else{
            $response=[
                'errno'=>5013,
                'msg'=>'注册失败'
            ];
-           die(json_encode($response,JSON_UNESCAPED_UNICODE));
+           return $response;
        }
 
 
@@ -91,6 +96,49 @@ class RegController extends Controller
      */
 
     public function logInfo(Request $request){
+        header("Access-Control-Allow-Origin: *");
+        $user_name=$request->input('user_name');
+        $pass=$request->input('pass');
+
+        $info=DB::table('zk_user')->where('user_name',$user_name)->first();
+        $id=$info->id;
+        if($info){
+            if(!password_verify($pass,$info->pass)){
+                $response=[
+                    'errno'=>5016,
+                    'msg'=>'密码不正确'
+                ];
+               return $response;
+            }else{
+                //生成token
+                $token=$this->getLoginUserToken($id);
+                $lkey='hb_token'.$id;
+                Redis::set($lkey,$token);
+                Redis::expire($lkey,604800);
+
+                $response=[
+                    'errno'=>0,
+                    'msg'=>'登陆成功',
+                    'token'=>$token,
+                    'id'=>$id,
+                ];
+//                die(json_encode($response,JSON_UNESCAPED_UNICODE));
+                return $response;
+
+            }
+
+        }else{
+            $response=[
+                'errno'=>5015,
+                'msg'=>'没有此用户,快去注册吧'
+            ];
+            return $response;
+        }
+    }
+
+    /*
+    public function logInfo(Request $request){
+        header("Access-Control-Allow-Origin: https://alili.gege12.vip");
         $user_name=$request->input('user_name');
         $pass=$request->input('pass1');
 
@@ -131,6 +179,8 @@ class RegController extends Controller
             die(json_encode($response,JSON_UNESCAPED_UNICODE));
         }
     }
+    */
+
 
 
     public function getLoginUserToken($id){
