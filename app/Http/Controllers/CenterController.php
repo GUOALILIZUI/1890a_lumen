@@ -12,7 +12,7 @@ class CenterController extends Controller
 
 
     public function center(Request $request){
-        header("Access-Control-Allow-Origin: *");
+        echo 11;exit;
         $token=$_GET['token'];
         $id=$_GET['id'];
         $response=[

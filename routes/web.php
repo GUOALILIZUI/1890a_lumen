@@ -24,18 +24,21 @@ $router->post('sign','OneController@sign' );
 
 
 //5.13周考
-$router->post('regInfo','RegController@regInfo' );
+//$router->post('regInfo','RegController@regInfo' );
 $router->get('loginIndex','RegController@loginIndex' );
-$router->get('getLoginUserToken','RegController@getLoginUserToken' );
-$router->post('logInfo','RegController@logInfo' );
-$router->get('b','RegController@b' );
+//$router->get('getLoginUserToken','RegController@getLoginUserToken' );
+//$router->post('logInfo','RegController@logInfo' );
+//$router->get('b','RegController@b' );
 
 
 //5.14
 
-$router->get('center', ['middleware' => ['token', 'option'], function () {
-    //
+$router->get('center', ['middleware' => 'token', function () {
     'CenterController@center';
 }]);
-$router->get('center','CenterController@center' );
+
+//$router->get('center','CenterController@center');
+$router->post('regInfo','RegController@regInfo');
+$router->post('logInfo','RegController@logInfo');
+
 

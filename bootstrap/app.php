@@ -57,15 +57,15 @@ $app->singleton(
 |
 */
 //
-// $app->middleware([
-////     App\Http\Middleware\ExampleMiddleware::class
+ $app->middleware([
+//     App\Http\Middleware\ExampleMiddleware::class
 //     App\Http\Middleware\Token::class
-// ]);
+     App\Http\Middleware\Option::class
+ ]);
 
  $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
      'token' =>App\Http\Middleware\Token::class,
-     'option' =>App\Http\Middleware\Option::class
  ]);
 
 /*
