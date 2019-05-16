@@ -33,13 +33,13 @@ class RegController extends Controller
                'msg'=>'邮箱不能为空'
            ];
            return $response;
-       }else if(empty($email)){
+       }else if(empty($pass1)){
            $response=[
                'errno'=>5019,
                'msg'=>'密码不能为空'
            ];
            return $response;
-       }else if(empty($email)){
+       }else if(empty($pass2)){
            $response=[
                'errno'=>5020,
                'msg'=>'确认密码不能为空'

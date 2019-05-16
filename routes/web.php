@@ -33,11 +33,11 @@ $router->get('loginIndex','RegController@loginIndex' );
 
 //5.14
 
-$router->get('center', ['middleware' => 'token', function () {
-    'CenterController@center';
-}]);
+//$router->get('center', ['middleware' => 'token', function () {
+//    'CenterController@center';
+//}]);
 
-//$router->get('center','CenterController@center');
+$router->get('center','CenterController@center');
 $router->post('regInfo','RegController@regInfo');
 $router->post('logInfo','RegController@logInfo');
 
