@@ -114,14 +114,14 @@ class RegController extends Controller
         $user_name=$info['user_name'];
         $pass=$info['pass'];
 
-//        //验证用户
-//        if(empty($user_name)){
-//            $response=[
-//                'errno'=>5017,
-//                'msg'=>'用户名不能为空'
-//            ];
-//            return $response;
-//        }
+        //验证用户
+        if(empty($user_name)){
+            $response=[
+                'errno'=>5017,
+                'msg'=>'用户名不能为空'
+            ];
+            return $response;
+        }
 
         $info=DB::table('zk_user')->where('user_name',$user_name)->first();
         if($info){
