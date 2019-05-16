@@ -21,38 +21,38 @@ class RegController extends Controller
        $pass2=$info['pass2'];
 
 //       //验证用户
-//       if(empty($user_name)){
-//           $response=[
-//               'errno'=>5017,
-//               'msg'=>'用户名不能为空'
-//           ];
-//           return $response;
-//       }
-//       //验证邮箱
-//       if(empty($email)){
-//           $response=[
-//               'errno'=>5018,
-//               'msg'=>'邮箱不能为空'
-//           ];
-//           return $response;
-//       }
-//
-//       //验证密码
-//       if(empty($email)){
-//           $response=[
-//               'errno'=>5019,
-//               'msg'=>'密码不能为空'
-//           ];
-//           return $response;
-//       }
-//       //验证确认密码
-//       if(empty($email)){
-//           $response=[
-//               'errno'=>5020,
-//               'msg'=>'确认密码不能为空'
-//           ];
-//           return $response;
-//       }
+       if(empty($user_name)){
+           $response=[
+               'errno'=>5017,
+               'msg'=>'用户名不能为空'
+           ];
+           return $response;
+       }
+       //验证邮箱
+       if(empty($email)){
+           $response=[
+               'errno'=>5018,
+               'msg'=>'邮箱不能为空'
+           ];
+           return $response;
+       }
+
+       //验证密码
+       if(empty($email)){
+           $response=[
+               'errno'=>5019,
+               'msg'=>'密码不能为空'
+           ];
+           return $response;
+       }
+       //验证确认密码
+       if(empty($email)){
+           $response=[
+               'errno'=>5020,
+               'msg'=>'确认密码不能为空'
+           ];
+           return $response;
+       }
        //判断邮箱
        $emailInfo=DB::table('zk_user')->where('email',$email)->first();
        if(empty($emailInfo)){
@@ -115,13 +115,13 @@ class RegController extends Controller
         $pass=$info['pass'];
 
         //验证用户
-//        if(empty($user_name)){
-//            $response=[
-//                'errno'=>5017,
-//                'msg'=>'用户名不能为空'
-//            ];
-//            return $response;
-//        }
+        if(empty($user_name)){
+            $response=[
+                'errno'=>5017,
+                'msg'=>'用户名不能为空'
+            ];
+            return $response;
+        }
 
         $info=DB::table('zk_user')->where('user_name',$user_name)->first();
         if($info){
