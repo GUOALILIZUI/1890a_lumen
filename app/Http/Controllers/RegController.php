@@ -55,7 +55,7 @@ class RegController extends Controller
 //       }
        //判断邮箱
        $emailInfo=DB::table('zk_user')->where('email',$email)->first();
-       if(!empty($emailInfo)){
+       if(empty($emailInfo)){
            $response=[
                'errno'=>5011,
                'msg'=>'此邮箱注册过了'

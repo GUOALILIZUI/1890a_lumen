@@ -12,7 +12,6 @@ class CenterController extends Controller
 
 
     public function center(Request $request){
-        echo 11;exit;
         $token=$_GET['token'];
         $id=$_GET['id'];
         $response=[
