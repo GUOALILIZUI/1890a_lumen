@@ -22,31 +22,31 @@ class RegController extends Controller
        print_r($user_name);die;
 
 //       //验证用户
-       if(empty($user_name)){
-           $response=[
-               'errno'=>5021,
-               'msg'=>'用户名不能为空'
-           ];
-           return $response;
-       }else if(empty($email)){
-           $response=[
-               'errno'=>5018,
-               'msg'=>'邮箱不能为空'
-           ];
-           return $response;
-       }else if(empty($email)){
-           $response=[
-               'errno'=>5019,
-               'msg'=>'密码不能为空'
-           ];
-           return $response;
-       }else if(empty($email)){
-           $response=[
-               'errno'=>5020,
-               'msg'=>'确认密码不能为空'
-           ];
-           return $response;
-       }
+//       if(empty($user_name)){
+//           $response=[
+//               'errno'=>5021,
+//               'msg'=>'用户名不能为空'
+//           ];
+//           return $response;
+//       }else if(empty($email)){
+//           $response=[
+//               'errno'=>5018,
+//               'msg'=>'邮箱不能为空'
+//           ];
+//           return $response;
+//       }else if(empty($email)){
+//           $response=[
+//               'errno'=>5019,
+//               'msg'=>'密码不能为空'
+//           ];
+//           return $response;
+//       }else if(empty($email)){
+//           $response=[
+//               'errno'=>5020,
+//               'msg'=>'确认密码不能为空'
+//           ];
+//           return $response;
+//       }
        //判断邮箱
        $emailInfo=DB::table('zk_user')->where('email',$email)->first();
        if(empty($emailInfo)){
