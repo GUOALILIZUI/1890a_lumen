@@ -42,3 +42,15 @@ $router->post('regInfo','RegController@regInfo');
 $router->post('logInfo','RegController@logInfo');
 
 
+//商品 5.17
+$router->get('goodslist','Goods\GoodsController@goodsList');
+$router->post('centent','Goods\GoodsController@cenTent');
+$router->post('cart','Cart\CartController@cart');
+$router->post('cartlist','Cart\CartController@cartList');
+$router->post('account','Account\AccountController@account');
+$router->post('orderlist','Order\OrderController@orderList');
+$router->get('pay','Pay\PayController@pay');
+$router->post('notify','Pay\PayController@notify');
+$router->get('aliReturn','Pay\PayController@aliReturn');
+
+
